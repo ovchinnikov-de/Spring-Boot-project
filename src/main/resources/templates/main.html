@@ -8,7 +8,7 @@
 
 <body>
 
-<header th:insert="/blocks/header :: header"></header>
+<header th:insert="~{/blocks/header :: header}"></header>
 
 <main>
   <header class="row tm-welcome-section">
@@ -30,88 +30,95 @@
     <div class="row tm-gallery">
       <!-- gallery page 1 -->
       <div id="tm-gallery-page-пицца" class="tm-gallery-page">
-        <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-          <figure>
-            <img src="/img/gallery/01.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-            <figcaption>
-              <h4 class="tm-gallery-title">Заголовок</h4>
-              <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
-              <p class="tm-gallery-price">100 руб.</p>
-            </figcaption>
-          </figure>
-        </article>
-        <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-          <figure>
-            <img src="/img/gallery/02.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-            <figcaption>
-              <h4 class="tm-gallery-title">Заголовок</h4>
-              <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
-              <p class="tm-gallery-price">100 руб.</p>
-            </figcaption>
-          </figure>
-        </article>
-        <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-          <figure>
-            <img src="/img/gallery/03.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-            <figcaption>
-              <h4 class="tm-gallery-title">Заголовок</h4>
-              <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
-              <p class="tm-gallery-price">100 руб.</p>
-            </figcaption>
-          </figure>
-        </article>
-        <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-          <figure>
-            <img src="/img/gallery/04.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-            <figcaption>
-              <h4 class="tm-gallery-title">Заголовок</h4>
-              <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
-              <p class="tm-gallery-price">100 руб.</p>
-            </figcaption>
-          </figure>
-        </article>
-        <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-          <figure>
-            <img src="/img/gallery/05.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-            <figcaption>
-              <h4 class="tm-gallery-title">Заголовок</h4>
-              <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
-              <p class="tm-gallery-price">100 руб.</p>
-            </figcaption>
-          </figure>
-        </article>
-        <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-          <figure>
-            <img src="/img/gallery/06.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-            <figcaption>
-              <h4 class="tm-gallery-title">Заголовок</h4>
-              <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
-              <p class="tm-gallery-price">100 руб.</p>
-            </figcaption>
-          </figure>
-        </article>
-        <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-          <figure>
-            <img src="/img/gallery/07.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-            <figcaption>
-              <h4 class="tm-gallery-title">Заголовок</h4>
-              <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
-              <p class="tm-gallery-price">100 руб.</p>
-            </figcaption>
-          </figure>
-        </article>
-        <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
-          <figure>
-            <img src="/img/gallery/08.jpg" alt="Image" class="img-fluid tm-gallery-img" />
-            <figcaption>
-              <h4 class="tm-gallery-title">Заголовок</h4>
-              <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
-              <p class="tm-gallery-price">100 руб.</p>
-            </figcaption>
-          </figure>
-        </article>
+        <div class="row">
+          <div th:each="pizza : ${pizzas}" class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+            <article>
+              <figure>
+                <img th:src="@{/static/${pizza.photo}}" alt="Image" class="img-fluid tm-gallery-img" />
+                <figcaption>
+                  <h4 class="tm-gallery-title" th:text="${pizza.heading}"></h4>
+                  <p class="tm-gallery-description" th:text="${pizza.description}"></p>
+                  <p class="tm-gallery-price" th:text="${pizza.price} + ' рублей'"></p>
+                </figcaption>
+              </figure>
+            </article>
+          </div>
+        </div>
       </div>
 
+      <!--
+              <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                <figure>
+                  <img src="/img/gallery/02.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+                  <figcaption>
+                    <h4 class="tm-gallery-title">Заголовок</h4>
+                    <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
+                    <p class="tm-gallery-price">100 руб.</p>
+                  </figcaption>
+                </figure>
+              </article>
+              <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                <figure>
+                  <img src="/img/gallery/03.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+                  <figcaption>
+                    <h4 class="tm-gallery-title">Заголовок</h4>
+                    <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
+                    <p class="tm-gallery-price">100 руб.</p>
+                  </figcaption>
+                </figure>
+              </article>
+              <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                <figure>
+                  <img src="/img/gallery/04.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+                  <figcaption>
+                    <h4 class="tm-gallery-title">Заголовок</h4>
+                    <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
+                    <p class="tm-gallery-price">100 руб.</p>
+                  </figcaption>
+                </figure>
+              </article>
+              <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                <figure>
+                  <img src="/img/gallery/05.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+                  <figcaption>
+                    <h4 class="tm-gallery-title">Заголовок</h4>
+                    <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
+                    <p class="tm-gallery-price">100 руб.</p>
+                  </figcaption>
+                </figure>
+              </article>
+              <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                <figure>
+                  <img src="/img/gallery/06.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+                  <figcaption>
+                    <h4 class="tm-gallery-title">Заголовок</h4>
+                    <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
+                    <p class="tm-gallery-price">100 руб.</p>
+                  </figcaption>
+                </figure>
+              </article>
+              <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                <figure>
+                  <img src="/img/gallery/07.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+                  <figcaption>
+                    <h4 class="tm-gallery-title">Заголовок</h4>
+                    <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
+                    <p class="tm-gallery-price">100 руб.</p>
+                  </figcaption>
+                </figure>
+              </article>
+              <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
+                <figure>
+                  <img src="/img/gallery/08.jpg" alt="Image" class="img-fluid tm-gallery-img" />
+                  <figcaption>
+                    <h4 class="tm-gallery-title">Заголовок</h4>
+                    <p class="tm-gallery-description">Очень вкусное блюдо, из всякой всячины</p>
+                    <p class="tm-gallery-price">100 руб.</p>
+                  </figcaption>
+                </figure>
+              </article> -->
+
+      <!-- gallery page 2 -->
       <div id="tm-gallery-page-салат" class="tm-gallery-page hidden">
         <article class="col-lg-3 col-md-4 col-sm-6 col-12 tm-gallery-item">
           <figure>
@@ -173,7 +180,7 @@
             </figcaption>
           </figure>
         </article>
-      </div> <!-- gallery page 2 -->
+      </div> <!-- gallery page 2 end -->
 
       <!-- gallery page 3 -->
       <div id="tm-gallery-page-лапша" class="tm-gallery-page hidden">
@@ -238,7 +245,7 @@
           </figure>
         </article>
 
-      </div> <!-- gallery page 3 -->
+      </div> <!-- gallery page 3 end -->
     </div>
   </main>
   <footer class="tm-footer text-center">
