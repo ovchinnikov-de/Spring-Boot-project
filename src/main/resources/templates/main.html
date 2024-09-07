@@ -63,8 +63,30 @@
       </div>
       </div>
     </div>
-      
+
     </div>
+  <div class="bron">
+  <section class="reservation-section">
+    <h2>Забронировать стол</h2>
+    <form class="reservation-form" action="/" method="post">
+      <label for="first-name">Имя</label>
+      <input type="text" id="first-name" name="first_name" required>
+
+      <label for="last-name">Фамилия</label>
+      <input type="text" id="last-name" name="last_name" required>
+
+      <label for="phone">Номер телефона</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <button type="submit">Забронировать</button>
+    </form>
+    <errors>
+      <th:block th:if="${errors != null}">
+        <p th:each="error : ${errors}" th:text="${error.defaultMessage}"></p>
+      </th:block>
+    </errors>
+  </section>
+  </div>
   </main>
   <footer class="tm-footer text-center">
   </footer>
